@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Funnychunks1",
+    "password": null,
     "database": "townify_db",
     "host": "localhost",
     "dialect": "mysql"
