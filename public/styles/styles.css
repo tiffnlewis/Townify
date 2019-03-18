@@ -1,28 +1,35 @@
 body {
   background-color: rgb(214, 255, 244);
-  
+
 }
+
 .list-group-item {
   line-height: 2.5;
 }
+
 .card {
   margin: 10px;
 }
+
 .block {
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   margin: 16px 6px 16px 6px;
 }
+
 .block ul {
   width: 100%;
   padding: 0;
   margin: 2px 0 4px 0;
 }
+
 .block li {
   border-bottom: 1px solid rgb(214, 255, 244);
   list-style-type: none;
   padding-left: 30px;
 }
+
 li:last-child {
   border: none;
 }
+
