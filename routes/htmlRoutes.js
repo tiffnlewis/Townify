@@ -19,6 +19,18 @@ module.exports = function(app) {
     // });
   });
 
+  app.get("/about", function(req, res) {
+    res.render("about");
+  });
+
+  app.get("/user", function(req, res) {
+    res.render("user");
+  });
+
+  app.get("/post", function(req, res) {
+    res.render("post");
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
