@@ -1,24 +1,41 @@
-module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define("User", {
-    userName: DataTypes.STRING,
-    userEmail: DataTypes.STRING,
-    userPassword: DataTypes.STRING,
-    userPhone: DataTypes.STRING
+module.exports = function(sequelize, Sequelize) {
+  var User = sequelize.define("user", {
+    id: {
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
+    firstname: {
+      type: Sequelize.STRING,
+      notEmpty: true
+    },
+    lastname: {
+      type: Sequelize.STRING,
+      notEmpty: true
+    },
+    username: {
+      type: Sequelize.TEXT
+    },
+    about: {
+      type: Sequelize.TEXT
+    },
+    email: {
+      type: Sequelize.STRING,
+      validate: {
+        isEmail: true
+      }
+    },
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    lastLogin: {
+      type: Sequelize.DATE
+    },
+    status: {
+      type: Sequelize.ENUM("active", "inactive"),
+      defaultValue: "active"
+    }
   });
-  User.associate = function(models) {
-    User.hasMany(models.Post, {
-      onDelete: "cascade"
-    });
-  };
   return User;
 };
-
-// module.exports = Leaflet;
-// Leaflet: function(sequelize, DataTypes) {
-//   sequelize.define("Leaflet", {
-//     id: DataTypes.STRING,
-//     title: DataTypes.STRING,
-//     summary: DataTypes.TEXT,
-//     time: DataTypes.STRING
-//   });
-// }

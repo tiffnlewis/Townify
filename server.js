@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
@@ -5,12 +6,22 @@ var exphbs = require("express-handlebars");
 var db = require("./models");
 
 var app = express();
+var passport = require("passport");
+var session = require("express-session");
+var bodyParser = require("body-parser");
 var PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// For Passport
+app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); //session secret
+app.use(passport.initialize());
+app.use(passport.session()); //persistent login sessions
 
 // Handlebars
 app.engine(
@@ -26,6 +37,11 @@ require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };
+
+var authRoute = require("./routes/auth.js")(app,passport);
+
+//load passport strategies //removed model.user to stop error
+require("./config/passport/passport.js")(passport);
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
