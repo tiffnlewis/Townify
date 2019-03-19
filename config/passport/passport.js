@@ -39,6 +39,7 @@ module.exports = function(passport, user) {
               lastname: req.body.lastname
             };
 
+            // eslint-disable-next-line no-unused-vars
             User.create(data).then(function(newUser, created) {
               if (!newUser) {
                 return done(null, false);
