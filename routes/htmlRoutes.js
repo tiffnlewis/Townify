@@ -19,10 +19,10 @@ module.exports = function (app) {
     // });
   });
 
-  app.get("/createAccount", function (req, res) {
-    res.render('createAccount')
-  })
-  
+  app.get("/createAccount", function(req, res) {
+    res.render("createAccount");
+  });
+
   app.get("/about", function(req, res) {
     res.render("about");
   });
@@ -31,12 +31,20 @@ module.exports = function (app) {
     res.render("user");
   });
 
-  app.get("/post", function(req, res) {
-    res.render("post");
+  app.get("/newPost", function(req, res) {
+    res.render("newPost");
+  });
+
+  app.get("/singlePost", function(req, res) {
+    res.render("singlePost");
   });
 
   // Render 404 page for any unmatched routes
-  app.get("*", function (req, res) {
+  app.get("*", function(req, res) {
     res.render("404");
+  });
+
+  app.post("/newPost", function(req, res) {
+    res.render("newPost");
   });
 };
