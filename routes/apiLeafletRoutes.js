@@ -1,6 +1,6 @@
 var db = require("../models");
 
-module.exports = function (app) {
+module.exports = function(app) {
   // Get all posts
   // app.get("/api/posts", function(req, res) {
   //   db.Leaflet.findAll({}).then(function(dbLeaflet) {
@@ -9,15 +9,15 @@ module.exports = function (app) {
   // });
 
   // Create a new post
-  app.post("/api/posts", function (req, res) {
-    db.Leaflet.create(req.body).then(function (dbLeaflet) {
+  app.post("/api/posts", function(req, res) {
+    db.Leaflet.create(req.body).then(function(dbLeaflet) {
       res.json(dbLeaflet);
     });
   });
 
   // Delete an post by id
-  app.delete("/api/posts/:id", function (req, res) {
-    db.Leaflet.destroy({ where: { id: req.params.id } }).then(function (
+  app.delete("/api/posts/:id", function(req, res) {
+    db.Leaflet.destroy({ where: { id: req.params.id } }).then(function(
       dbLeaflet
     ) {
       res.json(dbLeaflet);

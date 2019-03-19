@@ -5,7 +5,7 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     db.Leaflet.findAll({}).then(function(leafletResponse){
-      const dataForHandlebars = {
+      let dataForHandlebars = {
         Leaflets: leafletResponse
       }
       console.log(dataForHandlebars);
