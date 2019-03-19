@@ -8,7 +8,7 @@ module.exports = function (app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/billboard", function (req, res) {
+  app.get("/billboard", function(req, res) {
     res.render("billBoard");
     // db.Example.findOne({ where: { id: req.params.id } }).then(function(
     //   dbExample
@@ -20,8 +20,8 @@ module.exports = function (app) {
   });
 
   app.get("/createAccount", function (req, res) {
-    res.render('createAccount')
-  })
+    res.render('createAccount', myJSON);
+  });
   
   app.get("/about", function(req, res) {
     res.render("about");
