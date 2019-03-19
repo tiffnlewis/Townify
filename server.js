@@ -36,7 +36,7 @@ app.set("view engine", "handlebars");
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
-var syncOptions = { force: false };
+var syncOptions = { force: true };
 
 
 //load passport strategies //removed model.user to stop error

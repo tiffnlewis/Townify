@@ -4,7 +4,14 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    res.render("index");
+    db.Leaflet.findAll({}).then(function(leafletResponse){
+      const dataForHandlebars = {
+        Leaflets: leafletResponse
+      }
+      console.log(dataForHandlebars);
+      res.render("index", dataForHandlebars);
+    })
+
   });
 
   // Load example page and pass in an example by id

@@ -1,6 +1,13 @@
 module.exports = function(sequelize, Sequelize) {
-  var Leaflet = sequelize.define("Post", {
+  var Leaflet = sequelize.define("Leaflet", {
     title: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
+    category: {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
