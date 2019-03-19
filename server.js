@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // For Passport
-app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); //session secret
+app.use(session({ secret: "keyboard cat",resave: true, saveUninitialized:true})); //session secret
 app.use(passport.initialize());
 app.use(passport.session()); //persistent login sessions
 
@@ -38,7 +38,6 @@ require("./routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };
 
-var authRoute = require("./routes/auth.js")(app,passport);
 
 //load passport strategies //removed model.user to stop error
 require("./config/passport/passport.js")(passport);
