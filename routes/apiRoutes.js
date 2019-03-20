@@ -25,6 +25,10 @@ userNameSchema
   .symbols();
 
 module.exports = function(app) {
+  app.post("/api/post", function(req, res) {
+    console.log(req.body);
+    res.json("test");
+  });
   //create user
   app.post("/api/createUser", function(req, res) {
     user = req.body;
