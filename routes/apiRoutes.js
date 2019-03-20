@@ -97,6 +97,12 @@ module.exports = function(app) {
     });
   });
 
+  app.post("/api/posts", function(req, res) {
+    db.User.create(req.body).then(function(dbUser) {
+      res.json(dbUser);
+    });
+  });
+
   function authGen(length) {
     authToken = [];
     var possible =
