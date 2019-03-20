@@ -20,12 +20,12 @@ module.exports = function(sequelize, Sequelize) {
       len: [1]
     }
   });
-  // Leaflet.associate = function(models) {
-  //   Leaflet.belongsTo(models.User, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
+  Leaflet.associate = function(models) {
+    Leaflet.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
   return Leaflet;
 };
