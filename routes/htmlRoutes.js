@@ -52,8 +52,13 @@ module.exports = function(app) {
     res.render("newPost");
   });
 
-  app.get("/singlePost", function(req, res) {
-    res.render("singlePost");
+  app.get("/singlePost/:postId", function(req, res) {
+    db.Leaflet.findOne({
+      where: { id: req.params.postId }
+    }).then(results => {
+      console.log(results);
+      res.render("singlePost", results);
+    });
   });
 
   // Render 404 page for any unmatched routes
