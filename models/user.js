@@ -40,7 +40,8 @@ module.exports = function(sequelize, Sequelize) {
       defaultValue: "active"
     },
     lemons: {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
+      defaultValue: 30
     },
     authToken: {
       type: Sequelize.STRING
