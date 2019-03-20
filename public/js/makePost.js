@@ -12,7 +12,7 @@ $(document).ready(function() {
       authToken: localStorage.getItem("authToken")
     };
     $.post("/api/post", newLeaflet).then(function() {
-      console.log("test");
+      $(location).attr("href", "/");
     });
   });
 });
