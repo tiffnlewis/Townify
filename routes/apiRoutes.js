@@ -1,5 +1,5 @@
-var db = require('../models');
-var passwordValidator = require('password-validator');
+var db = require("../models");
+var passwordValidator = require("password-validator");
 
 // Create a schema
 var passwordSchema = new passwordValidator();
@@ -26,19 +26,19 @@ userNameSchema
 
 module.exports = function(app) {
   //create user
-  app.post('/api/createUser', function(req, res) {
+  app.post("/api/createUser", function(req, res) {
     user = req.body;
     db.User.findOne({
       where: { email: user.email }
     }).then(results => {
-      if (results == null) {
+      if (results === null) {
         db.User.findOne({
           where: { username: user.username }
         }).then(results => {
-          if (results == null) {
+          if (results === null) {
             if (
-              passwordSchema.validate(user.password) == true &&
-              userNameSchema.validate(user.username) == true
+              passwordSchema.validate(user.password) === true &&
+              userNameSchema.validate(user.username) === true
             ) {
               db.User.create(user).then(results => {
                 res.json(results);
@@ -46,26 +46,26 @@ module.exports = function(app) {
             } else {
               console.log("failed: 'Bad username or password'");
               res.json({
-                failed: 'Bad username or password'
+                failed: "Bad username or password"
               });
             }
           } else {
             console.log("failed: 'Username already exists'");
             res.json({
-              failed: 'Username already exists'
+              failed: "Username already exists"
             });
           }
         });
       } else {
         console.log("failed: 'Email already exists'");
         res.json({
-          failed: 'Email already exists'
+          failed: "Email already exists"
         });
       }
     });
   });
 
-  app.post('/api/login', function(req, res) {
+  app.post("/api/login", function(req, res) {
     userInfo = req.body;
     db.User.findOne({
       where: {
@@ -100,12 +100,15 @@ module.exports = function(app) {
   function authGen(length) {
     authToken = [];
     var possible =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    for (var i = 0; i < length + 1; i++)
-      authToken.push(
-        possible.charAt(Math.floor(Math.random() * possible.length))
-      );
-    return authToken.join('');
+    for (var i = 0; i < length + 1; i++) {
+      {
+        authToken.push(
+          possible.charAt(Math.floor(Math.random() * possible.length))
+        );
+      }
+      return authToken.join("");
+    }
   }
 };
