@@ -1,26 +1,111 @@
-var db = require("../models");
+var db = require('../models');
+var passwordValidator = require('password-validator');
+
+// Create a schema
+var passwordSchema = new passwordValidator();
+var userNameSchema = new passwordValidator();
+
+// Add properties to it
+passwordSchema
+  .is()
+  .min(5)
+  .has()
+  .digits()
+  .has()
+  .not()
+  .spaces();
+userNameSchema
+  .is()
+  .min(4)
+  .has()
+  .not()
+  .spaces()
+  .has()
+  .not()
+  .symbols();
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
+  //create user
+  app.post('/api/createUser', function(req, res) {
+    user = req.body;
+    db.User.findOne({
+      where: { email: user.email }
+    }).then(results => {
+      if (results == null) {
+        db.User.findOne({
+          where: { username: user.username }
+        }).then(results => {
+          if (results == null) {
+            if (
+              passwordSchema.validate(user.password) == true &&
+              userNameSchema.validate(user.username) == true
+            ) {
+              db.User.create(user).then(results => {
+                res.json(results);
+              });
+            } else {
+              console.log("failed: 'Bad username or password'");
+              res.json({
+                failed: 'Bad username or password'
+              });
+            }
+          } else {
+            console.log("failed: 'Username already exists'");
+            res.json({
+              failed: 'Username already exists'
+            });
+          }
+        });
+      } else {
+        console.log("failed: 'Email already exists'");
+        res.json({
+          failed: 'Email already exists'
+        });
+      }
     });
   });
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+  app.post('/api/login', function(req, res) {
+    userInfo = req.body;
+    db.User.findOne({
+      where: {
+        username: userInfo.username,
+        password: userInfo.password
+      }
+    }).then(results => {
+      if (results) {
+        authToken = authGen(50);
+        db.User.update(
+          {
+            authToken: authToken
+          },
+          {
+            where: { id: results.id }
+          }
+        ).then(() => {
+          toLocalStorage = {
+            authToken: authToken,
+            username: userInfo.username
+          };
+          res.json(toLocalStorage);
+        });
+      } else {
+        res.json({
+          userExists: false
+        });
+      }
     });
   });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.json(dbExample);
-    });
-  });
+  function authGen(length) {
+    authToken = [];
+    var possible =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (var i = 0; i < length + 1; i++)
+      authToken.push(
+        possible.charAt(Math.floor(Math.random() * possible.length))
+      );
+    return authToken.join('');
+  }
 };
