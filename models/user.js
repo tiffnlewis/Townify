@@ -33,7 +33,9 @@ module.exports = function(sequelize, Sequelize) {
       type: Sequelize.DATE
     },
     userImg: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      defaultValue:
+        "https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png"
     },
     status: {
       type: Sequelize.ENUM("active", "inactive"),
