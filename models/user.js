@@ -39,6 +39,10 @@ module.exports = function(sequelize, Sequelize) {
       type: Sequelize.ENUM("active", "inactive"),
       defaultValue: "active"
     },
+    lemons: {
+      type: Sequelize.INTEGER,
+      defaultValue: 30
+    },
     authToken: {
       type: Sequelize.STRING
     }

@@ -9,6 +9,13 @@ $(document).ready(() => {
   } else {
     $("#createAccountLoginLinks").css("display", "block");
   }
+
+  $("#logout").click(event => {
+    event.preventDefault();
+    localStorage.removeItem("username");
+    localStorage.removeItem("authToken");
+    $(location).attr("href", "/");
+  });
   $("#loginBtn").click(event => {
     event.preventDefault();
     userInfo = {
