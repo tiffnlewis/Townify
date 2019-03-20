@@ -5,14 +5,14 @@ $(document).ready(function() {
       titleInput: $("#inputTitle")
         .val()
         .trim(),
-      category: $("#category")
+      category: $("#Select1")
         .val()
         .trim(),
-      leaflet: $("#leaflet")
-        .val()
-        .trim(),
+      leaflet: $("#Textarea").val(),
       authToken: localStorage.getItem("authToken")
     };
-    $.post("/api/post", newLeaflet).then(function() {});
+    $.post("/api/post", newLeaflet).then(function() {
+      console.log("test");
+    });
   });
 });
