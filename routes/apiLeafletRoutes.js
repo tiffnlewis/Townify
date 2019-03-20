@@ -10,6 +10,7 @@ module.exports = function(app) {
 
   // Create a new post
   app.post("/api/posts", function(req, res) {
+    console.log(req.body);
     db.Leaflet.create(req.body).then(function(dbLeaflet) {
       res.json(dbLeaflet);
     });

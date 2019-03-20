@@ -40,5 +40,10 @@ module.exports = function(sequelize, Sequelize) {
       type: Sequelize.STRING
     }
   });
+  User.associate = function(models) {
+    User.hasMany(models.Leaflet, {
+      onDelete: "cascade"
+    });
+  };
   return User;
 };
