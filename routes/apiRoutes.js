@@ -103,12 +103,10 @@ module.exports = function(app) {
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     for (var i = 0; i < length + 1; i++) {
-      {
-        authToken.push(
-          possible.charAt(Math.floor(Math.random() * possible.length))
-        );
-      }
-      return authToken.join("");
+      authToken.push(
+        possible.charAt(Math.floor(Math.random() * possible.length))
+      );
     }
+    return authToken.join("");
   }
 };

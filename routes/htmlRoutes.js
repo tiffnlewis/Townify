@@ -4,13 +4,14 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Leaflet.findAll({}).then(function(leafletResponse) {
-      var dataForHandlebars = {
-        Leaflets: leafletResponse
-      };
-      console.log(dataForHandlebars);
-      res.render("index", dataForHandlebars);
-    });
+    // db.Leaflet.findAll({}).then(function(leafletResponse) {
+    //   var dataForHandlebars = {
+    //     Leaflets: leafletResponse
+    //   };
+    //   console.log(dataForHandlebars);
+    //   res.render('index', dataForHandlebars);
+    // });
+    res.render("index");
   });
 
   // Load example page and pass in an example by id
@@ -33,8 +34,18 @@ module.exports = function(app) {
     res.render("about");
   });
 
-  app.get("/user", function(req, res) {
-    res.render("user");
+  app.get("/user/:username/:authToken", function(req, res) {
+    console.log(req.params.username);
+    console.log(req.params.authToken);
+    db.User.findOne({
+      where: {
+        username: req.params.username,
+        authToken: req.params.authToken
+      }
+    }).then(results => {
+      console.log(results);
+      res.render("user", results.dataValues);
+    });
   });
 
   app.get("/newPost", function(req, res) {
@@ -48,9 +59,5 @@ module.exports = function(app) {
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
-  });
-
-  app.post("/newPost", function(req, res) {
-    res.render("newPost");
   });
 };

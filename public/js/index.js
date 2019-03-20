@@ -1,7 +1,10 @@
 $(document).ready(() => {
   if (localStorage.getItem("username") !== null) {
     var lsUserName = localStorage.getItem("username");
+    var lsAuthToken = localStorage.getItem("authToken");
     $("#userPostLinks").css("display", "block");
+    console.log("/user/" + lsUserName + "/" + lsAuthToken);
+    $("#userNameLink").attr("href", "/user/" + lsUserName + "/" + lsAuthToken);
     $("#userNameLink").text(lsUserName);
   } else {
     $("#createAccountLoginLinks").css("display", "block");
