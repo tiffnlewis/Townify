@@ -12,6 +12,10 @@ $(document).ready(() => {
       j[1] = j[1].replace(/%40/g, "@").trim();
       newUser[j[0].trim()] = j[1];
     });
+    newUser.userImg = $("#userImg")
+      .val()
+      .trim();
+    console.log(newUser);
     $.ajax("/api/createUser", {
       type: "POST",
       data: newUser

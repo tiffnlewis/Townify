@@ -38,7 +38,6 @@ require("./routes/htmlRoutes")(app);
 
 // var syncOptions = { force: false };
 
-
 //load passport strategies //removed model.user to stop error
 require("./config/passport/passport.js")(passport);
 

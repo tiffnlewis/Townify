@@ -32,6 +32,9 @@ module.exports = function(sequelize, Sequelize) {
     lastLogin: {
       type: Sequelize.DATE
     },
+    userImg: {
+      type: Sequelize.STRING
+    },
     status: {
       type: Sequelize.ENUM("active", "inactive"),
       defaultValue: "active"
