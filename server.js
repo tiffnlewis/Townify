@@ -19,9 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // For Passport
-app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
-); //session secret
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true })); //session secret
 app.use(passport.initialize());
 app.use(passport.session()); //persistent login sessions
 
@@ -38,20 +36,20 @@ app.set("view engine", "handlebars");
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
-var syncOptions = { force: false };
+// var syncOptions = { force: false };
 
 //load passport strategies //removed model.user to stop error
 require("./config/passport/passport.js")(passport);
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
-if (process.env.NODE_ENV === "test") {
-  syncOptions.force = true;
-}
+// if (process.env.NODE_ENV === "test") {
+//   syncOptions.force = true;
+// }
 
 // Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function() {
-  app.listen(PORT, function() {
+db.sequelize.sync().then(function () {
+  app.listen(PORT, function () {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
       PORT,
